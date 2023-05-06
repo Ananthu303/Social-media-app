@@ -56,7 +56,7 @@ def home(request):
 
    
       
-   return render(request,'codepen.html',{'post':post,'user':user})
+   return render(request,'home.html',{'post':post,'user':user})
 
 
 def register(request):
