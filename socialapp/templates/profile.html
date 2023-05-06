@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<style>
+body{
+ font-family: 'Open Sans', sans-serif;
+background-image: url('https://www.mobilewalla.com/hubfs/Images/landing-bg.jpg');
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: 100% 730px;
+
+}
+
+</style>
+<html lang="en">
+  <script src="https://kit.fontawesome.com/f7c3f44c97.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<head>{% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'feed' %}"> <span style="color: #5e6464;"><h2> <strong>Connect</strong></h2></span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto mb-3 mb-lg-0  text-center">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link"  href="{% url 'feed' %}">Feed</a>
+                </li>
+                {% for i in cu %}
+                <li class="nav-item">
+                  <a class="nav-link" href=""><img src="{{i.profile_img.url}}" height="30px" width="30px" style="border-radius: 30px;" alt=""></a>
+                </li>
+                {% endfor %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  
+
+
+                  
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'view-profile' request.user.id %}">View Profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'profile-edit' request.user.id %}">Edit profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                  </ul>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link"  href="{% url 'index' %}"><i class="fa-solid fa-user"></i></a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                  <div style="width: 60px;"></div>
+                </li>
+              </ul>
+              <form class="d-flex">
+                
+              </form>
+            </div>
+          </div>
+        </nav>
+        <!-- Navbar -->
+    <section class="h-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-9 col-xl-7">
+        <div class="card">
+          <div class="rounded-top text-white d-flex flex-row" style="height:200px;background-color: #FF3CAC;
+          background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+          ">
+          
+       
+        
+          
+         
+            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+
+              {% for i in profile %}
+             
+              <img src="{{i.profile_img.url}}" 
+                alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                style="width: 150px;height: 150px; z-index: 1">
+                
+              {% if request.user == i.user %}
+              
+<br>
+              <button type="button" class="btn" data-mdb-ripple-color="dark"
+                style="z-index: 1;background-color: #FF3CAC;
+                background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);">
+                <a href="{% url 'upload-post' %}" style="text-decoration: none;color: white">Upload Post</a>
+               
+              </button> 
+
+              <button type="button" class="btn" data-mdb-ripple-color="dark"
+                style="z-index: 1;background-color:  #2B86C5 ;margin-top: 5px;">
+                <a href="{{request.META.HTTP_REFERER}}" style="text-decoration: none;color: white">Back</a>
+               
+              </button>
+              {% else %}
+              <button  type="button"  class="btn btn-secondary" data-mdb-ripple-color="dark"
+                style="z-index: 1;">
+                {% if request.user in i.followers.all %}
+                
+                <a href="{% url 'follow' i.user.id %}" style="text-decoration: none;color: white">Unfollow</a>
+                <button type="button" class="btn" data-mdb-ripple-color="dark"
+                style="z-index: 1;background-color:  #2B86C5 ;margin-top: 5px;">
+                <a href="{{request.META.HTTP_REFERER}}" style="text-decoration: none;color: white">Back</a>
+               
+              </button>
+                {% else %}
+                
+                <a href="{% url 'follow' i.user.id %}" style="text-decoration: none;color: white;">Follow</a>
+                <button type="button" class="btn" data-mdb-ripple-color="dark"
+                style="z-index: 1;background-color:  #2B86C5 ;margin-top: 5px;">
+                <a href="{{request.META.HTTP_REFERER}}" style="text-decoration: none;color: white">Back</a>
+               
+              </button>
+                {% endif %}
+              </button>
+              {% endif %}
+              
+            </div>
+            <div class="ms-3" style="margin-top: 130px;">
+              <h5>{{i.user}} 
+                {% if request.user == i.user %}
+                <a href="{% url 'profile-edit' request.user.id %}"><i class="fa-solid fa-pen fa-1x"  style="color: #c3cccc;margin-left: 10px;"></i> </a>
+                {% endif %}
+              
+              </h5>
+              <h6>{{i.location}}</h6>
+              
+            </div>
+          </div>
+
+         
+          <div class="p-4 text-black" style="background-color: #f8f9fa;">
+            <div class="d-flex justify-content-end text-center py-1">
+              <div>
+                <p class="mb-1 h5">{{post_count}}</p>
+                <p class="small text-muted mb-0">  <h6>Posts</h6> </p>
+              </div>
+              
+              <div class="px-3">
+                <p class="mb-1 h5">{{i.followers.count}}</p>
+                <p class="small text-muted mb-0"> <h6>Followers</h6> </p>
+              </div>
+              <div>
+                <p class="mb-1 h5">{{i.following.count}}</p>
+                <p class="small text-muted mb-0"> <h6>Following</h6></p>
+              </div>
+            </div>
+            
+            
+          </div>
+          
+          <div class="card-body p-4 text-black">
+            <div class="mb-5">
+              <p class="lead fw-normal mb-1"> <strong> Bio</strong></p>
+              <div class="p-4" style="background-color: #f8f9fa;">
+                <p class="font-italic mb-1">{{i.bio}}</p>
+               
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="lead fw-normal mb-0"> <strong>Recent Posts</strong> </p>
+              <!-- <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p> -->
+            </div>
+           
+            <div class="row">
+              {% for i in post %}
+              
+
+              <div class="col-lg-4 col-md-6 col-sm-12 pb-3">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'comments' i.id %}"><img src="{{i.image.url}}"
+                 height="230px"  alt="image 1" class="w-100 rounded-3"></a>
+                {% else %}
+                <a href="#"><img src="{{i.image.url}}"
+                  height="230px"  alt="image 1" class="w-100 rounded-3"></a>
+                {% endif %}
+                
+              </div>
+             
+              {% endfor %}
+            </div>
+           
+            
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

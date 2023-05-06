@@ -1,0 +1,55 @@
+
+{% load static %}
+
+
+
+{% if request.user.is_authenticated %}
+<h2>{{request.user}}</h2>
+<h3><a href="{% url 'logout' %}">Logout</a></h3>
+<h3><a href="{% url 'view-profile' request.user.id %}">View Profile</a></h3>
+<h3><a href="{% url 'upload-post' %}">Upload Post</a></h3>
+{% else %}
+<h3><a href="{% url 'login' %}">Log IN</a></h3>
+
+{% endif %}
+
+{% for i,j,k,l,m,n,o in post %}
+<div>
+    <h2></h2>
+   <h1>User : <a href="http://127.0.0.1:8000/profile/{{i.id}}">{{i}} <h3><img src="{% static o %}" height="20px" width="20px"></h3></a></h1>  
+       <h3><img src="{% static j %}" height="200px" width="200px"></h3>
+    <h3>{{k}}</h3>
+    <h3>{{l}}</h3>
+
+   <form action="" method="POST">{% csrf_token %}
+    <h2><a href=" http://127.0.0.1:8000/like-post/{{n}}">like</a></h2>
+   </form>
+   
+    
+   
+    <h3> likes = {{m.all.count}}</h3>
+
+    {% if request.user in post.likes.username %}
+     <h1>like</h1>
+    {% else %}
+    <h1>unlike</h1>
+    {% endif %}
+
+
+
+    
+
+
+    {% if request.user == i %}
+    <h4><a href="http://127.0.0.1:8000/edit-post/{{n}}">Edit Post</a></h4>
+    <h4><a href="http://127.0.0.1:8000/delete-post/{{n}}">delete Post</a></h4>
+    {% endif %}
+
+
+</div>
+{% endfor %}
+
+
+
+
+

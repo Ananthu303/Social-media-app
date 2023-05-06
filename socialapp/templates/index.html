@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<style>
+  * {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+    width: 1170px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: auto;
+}
+
+/* Start Landing Page */
+
+.landing-page {
+    position: relative;
+    background-color: #FFF;
+}
+
+.landing-page .header-area {
+    display: flex;
+    padding: 25px 0 0;
+    position: relative;
+}
+
+.landing-page .header-area .logo {
+    text-transform: uppercase;
+    font-style: italic;
+    margin-top: 10px;
+    font-size: 19px;
+    width: 300px;
+    color: #5d5d5d;
+}
+
+.landing-page .header-area .links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: right;
+}
+
+.landing-page .header-area .links li {
+    display: inline-block;
+    margin-left: 30px;
+    color: #5d5d5d;
+    cursor: pointer;
+}
+
+.landing-page .header-area .links li:last-child {
+    border: 0;
+    border-radius: 20px;
+    padding: 10px 18px;
+    color: #FFF;
+    background-color:  rgb(16, 182, 223);
+    /* #6c63ff */
+}
+
+.landing-page .info {
+    width: 35%;
+    float: left;
+    margin-top: 130px;
+}
+
+.landing-page .info h1 {
+    font-size: 44px;
+    margin: 0 0 20px;
+    line-height: 1.4;
+    color: #5d5d5d;
+}
+
+.landing-page .info p {
+    margin: 0;
+    line-height: 1.6;
+    font-size: 15px;
+    color: #5d5d5d;
+}
+
+.landing-page .info button {
+    border: 0;
+    border-radius: 20px;
+    padding: 12px 30px;
+    margin-top: 30px;
+    cursor: pointer;
+    color: #FFF;
+    background-color: rgb(16, 182, 223);
+}
+
+.landing-page .image {
+    width: 50%;
+    float: right;
+    margin-top: 35px;
+}
+
+.landing-page .image img {
+    max-width: 100%;
+}
+
+.clearfix {
+  clear: both;
+}
+
+/* End Landing Page */
+</style>
+<html lang="en">
+<head>
+  <script src="https://kit.fontawesome.com/f7c3f44c97.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- Start Landing Page -->
+
+<div class="landing-page" >
+  <div class="container" >
+    <div class="header-area">
+      <div> <h1><span style="color: #5e6464;">Connect</span></h1></div>
+      <ul class="links">
+        <li><a style="text-decoration: none;color: #5d5d5d;;" href="{% url 'home' %}">Home</a>
+          </li>
+        <li>About Us</li>
+       {% if not request.user.is_authenticated %}
+        <li><a style="text-decoration: none;color: white;" href="{% url 'login' %}">Get Started</a>
+          </li>
+       {% else %}
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style="color: white;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{request.user}}
+            
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'view-profile' request.user.id %}">View Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'profile-edit' request.user.id %}">Edit profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+          </li>
+        {% endif %}
+
+        
+      </ul>
+      
+    </div>
+    <div class="info">
+      <h1>Welcome to Connect </h1>
+      <p>Connect with Billions of People around the world</p>
+      
+      <button><a style="text-decoration: none;color: white;" href="{% url 'home' %}">Explore</a>
+        </button>
+    </div>
+    <div class="image">
+      <img src="https://www.northshore.org/globalassets/healthy-you/blog/2018/social-media-blog.jpg">
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+<!-- https://www.kindpng.com/picc/m/14-144435_network-clipart-person-network-transparent-social-media-background.png -->
+
+<!-- End Landing Page -->
+
+
+</body>
+</html>
