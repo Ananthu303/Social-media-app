@@ -103,7 +103,7 @@ background-size: 100% 730px;
 
               <button type="button" class="btn" data-mdb-ripple-color="dark"
                 style="z-index: 1;background-color:  #2B86C5 ;margin-top: 5px;">
-                <a href="{{request.META.HTTP_REFERER}}" style="text-decoration: none;color: white">Back</a>
+                <a href="{% url 'home' %}" style="text-decoration: none;color: white">Back</a>
                
               </button>
               {% else %}
@@ -162,12 +162,19 @@ background-size: 100% 730px;
             
             
           </div>
-          
+          <br>
           <div class="card-body p-4 text-black">
-            <div class="mb-5">
+            <div class="mb-2">
               <p class="lead fw-normal mb-1"> <strong> Bio</strong></p>
               <div class="p-4" style="background-color: #f8f9fa;">
                 <p class="font-italic mb-1">{{i.bio}}</p>
+               
+              </div>
+            </div>
+            <div class="mb-2">
+              <p class="lead fw-normal mb-1"> <strong> Email</strong></p>
+              <div class="p-4" style="background-color: #f8f9fa;">
+                <p class="font-italic mb-1">{{i.user.email}}</p>
                
               </div>
             </div>
@@ -196,6 +203,8 @@ background-size: 100% 730px;
            
             
           </div>
+
+          
           {% endfor %}
         </div>
       </div>

@@ -20,7 +20,7 @@
   }
   .activity-container{
     background-color: white;
-    height: 500px;
+    height: 530px;
     width: 500px;
     border-radius: 30px;
   
@@ -124,16 +124,7 @@ background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20210
      
                  <div style="margin-left: 50px;padding-top: 10px;">
                   <a href="http://127.0.0.1:8000/profile/{{post.user.id}}" style="text-decoration: none;color:black;margin-left: 5px;"><strong>{{post.user}}</strong></a>
-                  {% if request.user == post.user %}
-                  <div style="margin-left: 350px;float: left;padding-right: 10px;">
-                    <a href="http://127.0.0.1:8000/edit-post/{{post.id}}"><i class="fa-solid fa-pen" style="color: rgb(34, 92, 128);"></i> </a>
-                    
-                  </div>
-                  <div style="margin-left: 350px;">
-                    <a href="http://127.0.0.1:8000/delete-post/{{post.id}}"><i class="fa-solid fa-trash" style="color:rgb(219, 40, 40)"></i> </a>
-                    
-                  </div>
-                   {% endif %}
+                 
                  </div>
      
                  

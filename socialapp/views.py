@@ -9,7 +9,7 @@ from .models import *
 import os
 from .forms import *
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+
 
 # Create your views here.
 
@@ -166,6 +166,7 @@ def profileedit(request,id):
        profile.location=location
        a=profile.user
        a.username=request.POST.get('username')
+       a.email=request.POST.get('email')
        a.save()
        profile.save()
        return redirect('view-profile',id=user_obj.id)
