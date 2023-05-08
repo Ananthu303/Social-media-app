@@ -19,19 +19,22 @@
           <div class="card text-dark">
             <div class="card-body p-4">
               <h4 class="mb-0">Comments <span> <a href="{% url 'home' %}" style="text-decoration: none;color:#5e6464;" type="submit" ><i class="fa-regular fa-circle-xmark"></i></a></span></h4> <br>
-              {% for post in comments %}
-              <p class="fw-strong mb-4 pb-2">{{count}} Comments & {{post.post.likes.all.count}} <i class="fa-solid fa-heart" style="color: red;"></i> Likes</p>
+              
+              <p class="fw-strong mb-4 pb-2">{{count}} Comments 
              
   
             </div>
   
         
-            
+            {% for post in comments %}
+          
             <div class="card-body p-4">
+              
               <div class="d-flex flex-start">
                 <img class="rounded-circle shadow-1-strong me-3"
                   src="{{post.profile.profile_img.url}}" alt="avatar" width="60"
                   height="60" />
+                  
                 <div>
                   <h6 class="fw-bold mb-1"><a style="text-decoration: none;color: rgb(67, 71, 75);" href="{% url 'view-profile' post.user.id %}">{{post.user}}</a></h6>
                   <!-- message -->
@@ -45,7 +48,7 @@
                 <form action="" method="POST">{% csrf_token %}
                   
 
-                  <a href="http://127.0.0.1:8000/delete-comment/{{i.id}}" class="link-muted"><i class="fa-solid fa-trash ms-2" style="color: rgb(185, 47, 47);"></i></a>
+                  <a href="http://127.0.0.1:8000/delete-comment/{{post.id}}" class="link-muted"><i class="fa-solid fa-trash ms-2" style="color: rgb(185, 47, 47);"></i></a>
                   
                 </form>
                   
@@ -73,7 +76,7 @@
             <textarea class="form-control"  id="textAreaExample" name="message" rows="4"></textarea> <br>
               
             <input type="submit" class="btn btn-primary" value="Submit">
-            <a href="{% url 'feed' %}" type="submit" class="btn btn-secondary">Back</a>
+            <a href="{% url 'home' %}" type="submit" class="btn btn-secondary">Back</a>
         
         </form>
         </div>
