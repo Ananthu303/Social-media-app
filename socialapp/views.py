@@ -297,6 +297,7 @@ def comments(request,id):
   
    post=Post.objects.get(id=id)
    the_post_comments=post.comments_set.all()
+   likes=post.likes.all().count()
    
 
    count=post.comments_set.all().count()
@@ -315,7 +316,7 @@ def comments(request,id):
 
       return redirect('comments',id=post.id)
    
-   return render(request,'comments.html',{'comments':the_post_comments,'count':count,'profile':profile,})
+   return render(request,'comments.html',{'comments':the_post_comments,'count':count,'profile':profile,'likes':likes})
 
 
 @login_required(login_url='login')  
