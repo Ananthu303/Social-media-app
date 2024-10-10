@@ -7,8 +7,8 @@ class Profile(models.Model):
     bio=models.TextField(blank=True)
     profile_img=models.ImageField(null=True,blank=True,default='blank-profile-picture.png')
     location=models.CharField(max_length=200,blank=True)
-    followers=models.ManyToManyField(User,related_name='followers',blank=True,null=True)
-    following=models.ManyToManyField(User,related_name='following',blank=True,null=True)
+    followers=models.ManyToManyField(User,related_name='followers')
+    following=models.ManyToManyField(User,related_name='following')
     
 
     def __str__(self):
